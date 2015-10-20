@@ -19,7 +19,7 @@ public class Frame extends JFrame{
 private int encounter;
 private boolean turn,next;
 private int p2fleet,p2fleetMax,p1fleet,p1fleetMax;
-private boolean wantW, wantD, wantS, wantA, plane;
+private boolean wantW, wantD, wantS, wantA, plane, fire, rangeDisp, spec;
 private int X, Y;
 private int w, h;
 public Frame(GameBoard can){
@@ -28,15 +28,24 @@ public Frame(GameBoard can){
 	wantA = false;
 	wantS = false;
 	wantD = false;
+	fire = false;
+	rangeDisp = false;
 	initialize(can);
 	this.addKeyListener(new KeyAdapter() {
 		public void keyPressed(KeyEvent e) {
 			switch(e.getKeyCode()) {
+			case KeyEvent.VK_PERIOD:
+				rangeDisp = !rangeDisp;
+				break;
+			case KeyEvent.VK_COMMA:
+				fire = true;
+				break;
 			case KeyEvent.VK_UP:
 				wantW = false;
 				wantA = false;
 				wantS = false;
 				wantD = false;
+				fire = false;
 				if(turn){	
 				if(p2fleet<p2fleetMax)
 					p2fleet++;
@@ -53,6 +62,7 @@ public Frame(GameBoard can){
 				wantA = false;
 				wantS = false;
 				wantD = false;
+				fire = false;
 				plane=false;
 				if(turn){	
 				if(p1fleet<p1fleetMax)
@@ -71,6 +81,7 @@ public Frame(GameBoard can){
 				wantA = false;
 				wantS = false;
 				wantD = false;
+				fire = false;
 				if(turn){	
 				if(p2fleet>0)
 					p2fleet--;
@@ -89,6 +100,7 @@ public Frame(GameBoard can){
 				wantS = false;
 				wantD = false;
 				plane=false;
+				fire = false;
 				if(turn){	
 				if(p1fleet>0)
 					p1fleet--;
@@ -104,20 +116,25 @@ public Frame(GameBoard can){
 			case KeyEvent.VK_W:
 				if(!wantD && !wantA && !wantS)
 						wantW = true;
+				fire = false;
 				break;
 			case KeyEvent.VK_S:
 				if(!wantD && !wantA && !wantW)
 					wantS = true;
+				fire = false;
 				break;
 			case KeyEvent.VK_A:
 				if(!wantD && !wantW && !wantS)
 					wantA = true;
+				fire = false;
 				break;
 			case KeyEvent.VK_D:
 				if(!wantW && !wantA && !wantS)
 					wantD = true;
+				fire = false;
 				break;
 			case KeyEvent.VK_F:
+				fire = false;
 				plane = false;
 				next=!next;
 				break;
@@ -135,8 +152,25 @@ public Frame(GameBoard can){
 		}
 	});
 }
+	public void collide(){
+		p1fleet = 0;
+		p2fleet = 0;
+	}
+	public void setSpec(boolean s){
+		spec = s;
+	}
+	public boolean rangeDisp(){
+		return rangeDisp;
+	}
+	
 	public boolean planeLaunch(){
 		return plane;
+	}
+	public boolean wantFire(){
+		return fire;
+	}
+	public void setFire(boolean f){
+		fire = f;
 	}
 	public void setPlane(){
 		plane=false;

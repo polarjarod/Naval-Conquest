@@ -1,7 +1,7 @@
 import java.util.ArrayList;
+import java.io.*;
 
-
-public class Arsenal {
+public class Arsenal implements Serializable {
 
 	private ArrayList<Entity> player1 = new ArrayList<Entity>();
 	private ArrayList<Entity> player2 = new ArrayList<Entity>();
@@ -12,9 +12,17 @@ public class Arsenal {
 		switch(encounter){
 		case 1:
 			player1.add(new FleetCarrier(true, 5, 35));
-			player2.add(new FleetCarrier(false, 45, 35));
 			player1.add(new CargoShip(true, 5, 30));
+			player1.add(new BattleShip(true, 5, 25));
+			player1.add(new HeavyCruiser(true, 5, 20));
+			player1.add(new Cruiser(true, 5, 15));
+			
 			player2.add(new CargoShip(false, 45, 30));
+			player2.add(new FleetCarrier(false, 45, 35));
+			player2.add(new BattleShip(false, 45, 25));
+			player2.add(new HeavyCruiser(false, 45, 20));
+			player2.add(new Cruiser(false, 45, 15));
+			
 			break;
 		}
 	}

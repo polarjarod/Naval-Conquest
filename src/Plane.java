@@ -33,8 +33,8 @@ public class Plane{
 		return donezo;
 	}
 	public void newTurn(){
-		if(side)moves = 3;
-		else moves = 2;
+		if(side)moves = 1;
+		else moves = 0;
 	}
 	public void goBack(int c1, int c2){
 		cord1 = c1;
@@ -64,20 +64,20 @@ public class Plane{
 	}
 	public void move(){
 			
-			if(Y <  cord2 && moves<9){
+			if(Y <  cord2 && moves<11){
 				Y++;
 				moves++;
 			}
-			if(Y > cord2 && moves<9){
+			if(Y > cord2 && moves<11){
 				Y--;
 				moves++;
 			}
-			if(X < cord1 && moves<9){
+			if(X < cord1 && moves<11){
 				X++;
 				moves++;
 				direction = true;
 			}
-			if(X > cord1 && moves<9){
+			if(X > cord1 && moves<11){
 				X--;
 				moves++;
 				direction = false;
@@ -85,8 +85,9 @@ public class Plane{
 			if(X == eX && Y == eY){
 				land = true;
 			}
-			if(X == cord1 && Y == cord2 && !land)
+			if(X == cord1 && Y == cord2 && !land){
 				bomb=true;
+			}
 		
 	}
 	public int getDodge(){

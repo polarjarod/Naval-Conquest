@@ -1,5 +1,7 @@
+import java.io.*;
 
-public interface Entity {
+
+public interface Entity extends Serializable{
 	public boolean canMove();
 	public int X();
 	public int Y();
@@ -14,6 +16,7 @@ public interface Entity {
 	public int regHP();
 	public void setHP(int hp);
 	public int getGAttack();
+	public int gunneryRange();
 	public void newTurn();
 	public String name();
 	public boolean isCV();
@@ -26,4 +29,6 @@ public interface Entity {
 	public void planeShotDown();
 	public int Identity();
 	public boolean getDirection();
+	public boolean Ammo();
+	public void fire();
 }

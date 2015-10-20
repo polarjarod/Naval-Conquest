@@ -1,7 +1,7 @@
 
 public class FleetCarrier implements Ship{
 
-	private int squads=0,squadLim, hP, count, move, squadsAir, SA;
+	private int squads=0,squadLim, hP, count, move, squadsAir, SA, range, ammo, shots;
 	private int X,Y;
 	private int X1, Y1;
 	private boolean canMove;
@@ -9,7 +9,9 @@ public class FleetCarrier implements Ship{
 	private boolean donezo;
 	private boolean direction;
 public FleetCarrier(boolean s, int x, int y){
+	ammo = 1;
 	side = s;
+	range = 6;
 	if(side==true){
 		squadLim=10;
 		direction = true;
@@ -34,6 +36,7 @@ public boolean donezo(){
 public void newTurn(){
 	canMove = true;
 	count=0;
+	shots =0;
 }
 	
 public int numSquads(){
@@ -85,10 +88,10 @@ public void setHP(int hp) {
 
 public int getGAttack() {
 	if(side == true){
-		return 100;
+		return 35;
 	}
 	else{
-		return 1;
+		return 10;
 	}
 }
 
@@ -204,6 +207,21 @@ public int Identity() {
 @Override
 public boolean getDirection() {
 	return direction;
+}
+@Override
+public int gunneryRange() {
+	return range;
+}
+@Override
+public boolean Ammo() {
+	if(shots<ammo)
+		return true;
+	return false;
+}
+@Override
+public void fire() {
+	shots++;
+	
 }
 
 }
